@@ -25,3 +25,14 @@ post '/songs/new' do
   @song.save
   redirect '/songs'
 end
+
+get '/users' do
+    @users = User.all
+    erb :'users/index'
+end
+
+
+get '/users/new' do
+    @users = User.all
+    erb :'users/new'
+end
