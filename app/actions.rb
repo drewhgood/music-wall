@@ -27,12 +27,24 @@ post '/songs/new' do
 end
 
 get '/users' do
+    @songs = Song.all
     @users = User.all
     erb :'users/index'
 end
 
-
 get '/users/new' do
-    @users = User.all
+    @songs = Song.all
     erb :'users/new'
+end
+
+
+post '/users/new' do
+  @user = User.new(
+    email: params[:email],
+    name_first: params[:name_first],
+    name_last: params[:name_last],
+    password:  params[:password]
+  )
+  @user.save
+  redirect '/songs/new'
 end
