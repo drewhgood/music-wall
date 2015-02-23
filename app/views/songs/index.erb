@@ -1,12 +1,22 @@
-<h1> All Songs</h1>
+<div class="row">
+  <h1> All Songs</h1>  
+  <p><a class="btn btn-sm btn-warning" href="/songs/new" role="button">Add a Song</a></p>
+   
+</div>
 
-<% @songs.each do |song| %>
- 
-    <h3><%= song.title %> <small>(by: <%= song.author %>)</small></h3>
-    <p>
-      <%= song.url %>
-    </p>
 
-<% end %>
 
-<a href="/songs/new">Add a new song</a>
+<div class="row">
+  <% @songs.each do |song| %>
+   
+   <div class = "col-sm-4 text-center song">
+      <h3><%= song.title %> <small>(by: <%= song.author %>)</small></h3>
+      <p>
+        <%= song.url %>
+      </p>
+    </div>
+
+  <% end %>
+</div>
+
+

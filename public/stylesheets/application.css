@@ -1,0 +1,9 @@
+.bord {
+  color:orange;
+}
+
+.song{
+  border: 1px solid white;
+  border-radius: 5%;
+
+}

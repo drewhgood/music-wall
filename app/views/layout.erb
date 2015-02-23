@@ -7,17 +7,46 @@
     See: http://necolas.github.com/normalize.css/
   -->
   <link rel="stylesheet" href="/stylesheets/normalize.css">
+  <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
+  <link href="stylesheets/bootstrap-responsive.css" rel="stylesheet">
+
+
   <!--
     application.css is where you put your styles
   -->
-  <link rel="stylesheet" href="/stylesheets/application.css">
+  
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="/javascript/application.js"></script>
-
-  <title></title>
+  <link rel="stylesheet" href="/stylesheets/application.css">
+  <title>SongBORD</title>
 </head>
+
 <body>
-  <%= yield %>
-</body>
+
+    <div class="container">
+      <div class="header">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation" class="active"><a href="#">Home</a></li>
+            <li role="presentation"><a href="/songs">All Songs <span class="badge"><%= @songs.count %></span></a></li>
+            <li role="presentation"><a href="/songs/new">Share</a></li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">Song<span class="bord">BORD</span></h3>
+      </div>
+
+      <div class="jumbotron">
+      
+           <%= yield %>
+      </div>
+
+    </div> <!-- /container -->
+
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
 </html>
+
+
