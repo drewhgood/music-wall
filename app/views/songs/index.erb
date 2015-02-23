@@ -1,0 +1,12 @@
+<h1> All Songs</h1>
+
+<% @songs.each do |song| %>
+ 
+    <h3><%= song.title %> <small>(by: <%= song.author %>)</small></h3>
+    <p>
+      <%= song.url %>
+    </p>
+
+<% end %>
+
+<a href="/songs/new">Add a new song</a>
