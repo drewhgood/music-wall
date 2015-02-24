@@ -10,7 +10,14 @@
    <div class = "col-sm-4 text-center song">
       <h3><%= song.title %></h3>
       <p><%= song.url %></p>
-      <span class="user"><%= User.find(song.user_id).email %></span>
+      <span class="user"><%= song.user.email %></span>
+
+      <form action="/songs" method="post">
+
+        <input type="hidden" name="song_id" value= <%= song.id %> >
+        <button type="submit" class="btn btn-alert">Vote</button>
+
+      </form>
 
     </div>
 
