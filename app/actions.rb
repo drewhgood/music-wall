@@ -6,6 +6,13 @@ end
 
 
 get '/songs' do
+    @username = request.cookies["email"] 
+    @user = User.where(email: @username)
+    @id = @user[0].id
+
+
+    #checking if user id and song id are already in a vote
+
     @users = User.all
     @songs = Song.all
     erb :'songs/index'
@@ -35,8 +42,6 @@ end
 
 
 post '/songs/new' do
-
-
 
    @username = request.cookies["email"] 
 

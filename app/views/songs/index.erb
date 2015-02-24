@@ -8,16 +8,23 @@
   <% @songs.each do |song| %>
    
    <div class = "col-sm-4 text-center song">
-      <h3><%= song.title %></h3>
+      <h3>
+      <%= song.title %>
+      <%if song.ratings%><%= song.ratings.count%><%end%>
+      </h3>
       <p><%= song.url %></p>
-      <span class="user"><%= song.user.email %></span>
 
+      <% if Rating.where(song_id: song.id, user_id: @id) == [] %>
+      <% binding.pry%> 
       <form action="/songs" method="post">
-
         <input type="hidden" name="song_id" value= <%= song.id %> >
-        <button type="submit" class="btn btn-alert">Vote</button>
-
+        <button type="submit" class="glyphicon glyphicon-star">Vote</button>
       </form>
+
+      <% end %>
+    
+      <span class="user"><%= song.user.email %></span>
+      
 
     </div>
 
