@@ -16,7 +16,15 @@
           <ul class="nav nav-pills pull-right">
             <li role="presentation" class="active"><a href="/">Home</a></li>
             <li role="presentation"><a href="/songs">All Songs <span class="badge"><%= @songs.count %></span></a></li>
-            <li role="presentation"><a href="/songs/new">Add</a></li>
+            <li role="presentation"><a href="/songs/new">Add Song</a></li>
+             
+            <% if @username %> 
+              <li role="presentation"><a href="/users/logout">Log Out
+            <%else%>
+              <li role="presentation"><a href="/users/new">Sign Up
+            <%end%>
+
+             </a></li>
           </ul>
         </nav>
         <h3 class="text-muted">Song<span class="bord">BORD</span></h3>

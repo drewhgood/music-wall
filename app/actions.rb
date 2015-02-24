@@ -1,4 +1,5 @@
 get '/' do
+  @username = request.cookies["email"]
   @songs = Song.all
   erb :'index'
 end
@@ -33,8 +34,15 @@ get '/users' do
 end
 
 get '/users/new' do
-    @songs = Song.all
+  @username = request.cookies["email"]
+  @songs = Song.all
+
+  if@username
+    erb :'users/welcome'
+  else
     erb :'users/new'
+  end
+
 end
 
 
@@ -46,5 +54,24 @@ post '/users/new' do
     password:  params[:password]
   )
   @user.save
-  redirect '/songs/new'
+
+  response.set_cookie("email", :value => params[:email], :path => "/", :expires => Time.now + 60*60*24*365*3)
+
+
+  redirect '/users/new'
 end
+
+get '/users/logout' do  
+  
+  response.set_cookie("email", :value => "", :path => "/", :expires => Time.now - 86400000)
+    redirect '/'
+  redirect '/users/new'
+
+
+end
+
+
+
+
+
+
