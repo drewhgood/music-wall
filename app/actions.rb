@@ -6,22 +6,39 @@ end
 
 
 get '/songs' do
+    User.joins(:songs)
+    @users = User.all
     @songs = Song.all
     erb :'songs/index'
 end
 
 
 get '/songs/new' do
+
+
+
+    @username = request.cookies["email"] 
+
     @songs = Song.all
     erb :'songs/new'
 end
 
 
 post '/songs/new' do
+
+
+
+   @username = request.cookies["email"] 
+
+  @user = User.where(email: @username)
+
+  @id = @user[0].id
+
   @song = Song.new(
     title: params[:title],
     url: params[:url],
-    author:  params[:author]
+    author:  params[:author],
+    user_id: @id
   )
   @song.save
   redirect '/songs'

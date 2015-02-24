@@ -8,10 +8,10 @@
   <% @songs.each do |song| %>
    
    <div class = "col-sm-4 text-center song">
-      <h3><%= song.title %> <small>(by: <%= song.author %>)</small></h3>
-      <p>
-        <%= song.url %>
-      </p>
+      <h3><%= song.title %></h3>
+      <p><%= song.url %></p>
+      <span class="user"><%= User.find(song.user_id).email %></span>
+
     </div>
 
   <% end %>
