@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
   <script src="/javascript/application.js"></script>
@@ -14,8 +13,8 @@
       <div class="header">
         <nav>
           <ul class="nav nav-pills pull-right">
-            <li role="presentation" class="active"><a href="/">Home</a></li>
-            <li role="presentation"><a href="/songs">All Songs </a></li>
+            <li role="presentation"><a href="/">Home</a></li>
+            <li role="presentation"><a href="/songs">All Songs<span class="badge"><%= @songs.count %></span> </a></li>
             <li role="presentation"><a href="/songs/new">Add Song</a></li>
              
             <% if @username %> 

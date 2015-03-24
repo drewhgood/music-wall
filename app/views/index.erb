@@ -1,15 +1,12 @@
 <h1 class="text-center jumbotron-heading">Welcome to SongBORD</h1>
   
-  <p class="lead text-center">This is the place to be. Share your favorite song with complete strangers. There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum.</p>
+<p class="lead text-center">This is the place to be. Share your favorite song with complete strangers. There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum.</p>
 
-  <div class="text-center">
+<div class="text-center">
   <% if @username %>
     <p><a class="btn btn-lg btn-warning" href="/songs/new" role="button">Add a Song</a></p>
+
   <% else %>
-  
-    <p><a class="btn btn-lg btn-warning" href="/users/new" role="button"> Sign Up</a><a class="btn btn-lg btn-warning" href="/users/login" role="button"> Log In</a></p>
-
+    <p><a class="btn btn-lg btn-warning" href="/users/new" role="button"> Sign Up</a> <a class="btn btn-lg btn-warning" href="/users/login" role="button"> Log In</a></p>
   <% end %>
-
-
-  </div>
+</div>

@@ -1,7 +1,5 @@
-
-
 <div class="row">
-  <h1> All Songs</h1>  
+  <h1 class="text-center"> All Songs</h1>  
   <% if @username %>
   <p><a class="btn btn-sm btn-warning" href="/songs/new" role="button">Add a Song</a></p>
   <% end %> 
@@ -9,29 +7,19 @@
 
 
 <%unless @username%>
-
-<div class="alert alert-warning alert-dismissible text-center" role="alert">
-  
-  <strong>Warning!</strong> You need to <a href="/users/login">login</a> or <a href="/users/new">register</a> before you can add songs.
-</div>
-
+  <div class="alert alert-warning alert-dismissible text-center" role="alert">
+    <strong>Warning!</strong> You need to <a href="/users/login">login</a> or <a href="/users/new">register</a> before you can add songs.
+  </div>
 <%end%>
 
 <div class="row">
   <% @songs.each do |song| %>
-
-
-   
    <div class = "col-sm-4 text-center song">
-      <h3>
-      <%= song.title %>
-      <%if song.ratings%><%end%>
-      </h3>
+      <h3><%= song.title %><%if song.ratings%><%end%></h3>
       <p><%= song.url %></p>
-
+      
       <%if @username && Rating.where(song_id: song.id, user_id: @id) == [] %>
 
-         
         <form action="/songs" method="post">
           <input type="hidden" name="song_id" value= <%= song.id %> >
           <button type="submit" class="btn btn-lg glyphicon glyphicon-star">Vote</button>
@@ -39,16 +27,12 @@
 
         <%else%>
         <form>
-        <button type="submit" class="btn btn-lg glyphicon glyphicon-star" disabled><%= song.ratings.count%></button>
+          <button type="submit" class="btn btn-lg glyphicon glyphicon-star" disabled><%= song.ratings.count%></button>
         </form>
 
-         
-
       <% end %>
-    
+   
       <span class="user"><%= song.user.email %></span>
-      
-
     </div>
 
   <% end %>
