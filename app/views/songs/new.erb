@@ -1,12 +1,15 @@
 <h1 class="text-center"> Add a Song</h1>
 
 <% if @errors %>
-  <div id="errors">
-      <% @errors.each do |e| %>
-         <p><%= e %></p>
-      <% end %>
-  </div>
-<% end %>
+<div id="errors"> 
+  <% @errors.each do |e| %>
+    <div class="alert alert-warning alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <strong>Warning!</strong> <%= e.gsub(/[\[\],'"']/, '') %>
+    </div>
+  <% end %>
+<%end%>
+
 
 <% if @username %>
 

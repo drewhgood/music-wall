@@ -1,4 +1,5 @@
 enable :session
+require 'sinatra/flash'
 
 get '/' do
   @username = request.cookies["email"]
@@ -25,6 +26,7 @@ post '/songs' do
 end
 
 get '/songs/new' do
+    @errors = flash[:errors]
     @username = request.cookies["email"] 
     @songs = Song.all
     erb :'songs/new'
@@ -43,8 +45,9 @@ post '/songs/new' do
   )
   if @song.save
     redirect("/songs")
+    session.delete(:errors)
   else
-    session[:errors] = @song.errors.values.map{|e| e.to_s}
+    flash[:errors] = @song.errors.values.map{|e| e.to_s}
     redirect('/songs/new')
   end
 end
@@ -56,9 +59,10 @@ get '/users' do
 end
 
 get '/users/new' do
+  @errors = flash[:errors]
   @username = request.cookies["email"]
   @songs = Song.all
-  if@username
+  if @username
     erb :'users/welcome'
   else
     erb :'users/new'
@@ -66,7 +70,6 @@ get '/users/new' do
 end
 
 post '/users/new' do
-  @errors = session[:errors]
   @user = User.new(
     email: params[:email],
     name_first: params[:name_first],
@@ -76,11 +79,13 @@ post '/users/new' do
   @user.save
   if @user.save
     response.set_cookie("email", :value => params[:email], :path => "/", :expires => Time.now + 60*60*24*365*3)
+    session.delete(:errors)
     redirect("/songs")
   else
-    session[:errors] = @user.errors.values.map{|e| e.to_s}
+    flash[:errors] = @user.errors.values.map{|e| e.to_s}
     redirect('/users/new')
   end
+  
 end
 
 get '/users/logout' do   
