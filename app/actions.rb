@@ -1,6 +1,6 @@
 get '/' do
   @username = request.cookies["email"]
-  @songs = Song.all
+  # @songs = Song.all
   erb :'index'
 end
 
@@ -8,7 +8,8 @@ end
 get '/songs' do
     @username = request.cookies["email"] 
     @user = User.where(email: @username)
-    @id = @user[0].id
+     @id = @user[0].id if @username
+   
 
 
     #checking if user id and song id are already in a vote
@@ -101,6 +102,28 @@ get '/users/logout' do
 
 
 end
+
+post '/users/login' do
+  params[:email]
+  params[:password]
+
+  users = User.where(email: params[:email]).where(password: params[:password])
+  if users.count > 0
+    user = users[0]
+    response.set_cookie("email", :value => params[:email], :path => "/", :expires => Time.now + 60*60*24*365*3)
+    redirect '/songs'
+  else
+    # login failed
+    redirect '/?message=Failed'
+  end
+end
+
+get '/users/login' do
+  erb :'users/login'
+  
+end
+
+
 
 
 
