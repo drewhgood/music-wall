@@ -1,5 +1,13 @@
 <h1 class="text-center"> Sign up!</h1>
 
+<% if @errors %>
+  <div id="errors">
+      <% @errors.each do |e| %>
+         <p><%= e %></p>
+      <% end %>
+  </div>
+<% end %>
+
 <form action="/users/new" method="post">
   <div class="form-group">
     <label>Email</label>

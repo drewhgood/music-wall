@@ -1,3 +1,5 @@
+enable :session
+
 get '/' do
   @username = request.cookies["email"]
   @songs = Song.all
@@ -32,14 +34,19 @@ post '/songs/new' do
   @username = request.cookies["email"] 
   @user = User.where(email: @username)
   @id = @user[0].id
+  @errors = session[:errors]
   @song = Song.new(
     title: params[:title],
     url: params[:url],
     author:  params[:author],
     user_id: @id
   )
-  @song.save
-  redirect '/songs'
+  if @song.save
+    redirect("/songs")
+  else
+    session[:errors] = @song.errors.values.map{|e| e.to_s}
+    redirect('/songs/new')
+  end
 end
 
 get '/users' do
@@ -59,6 +66,7 @@ get '/users/new' do
 end
 
 post '/users/new' do
+  @errors = session[:errors]
   @user = User.new(
     email: params[:email],
     name_first: params[:name_first],
@@ -66,8 +74,13 @@ post '/users/new' do
     password:  params[:password]
   )
   @user.save
-  response.set_cookie("email", :value => params[:email], :path => "/", :expires => Time.now + 60*60*24*365*3)
-  redirect '/users/new'
+  if @user.save
+    response.set_cookie("email", :value => params[:email], :path => "/", :expires => Time.now + 60*60*24*365*3)
+    redirect("/songs")
+  else
+    session[:errors] = @user.errors.values.map{|e| e.to_s}
+    redirect('/users/new')
+  end
 end
 
 get '/users/logout' do   
